@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="estilo.css">
+        <script src="jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="bootstrap.min.js"></script>
+        
+        <script src="https://kit.fontawesome.com/8cb5e7477f.js" crossorigin="anonymous"></script>
+        <script src="js.js">
+        </script>
+        <style>
+            .colProceso{
+                border: 1px solid black;
+            }
+            #tablaPerso{
+                display: none;
+            }
+            .proceso:hover{
+                cursor:pointer;
+                background:#eee
+            }
+        </style>
+        
+        
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+       
+        <script src = "https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" ></script>
+        <script src = "https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js" ></script>
+        <script src = "https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js" ></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" ></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" ></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" ></script>
+        <script src = "https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js" ></script>
+        <script src = "https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js" ></script>
+    </head>
+
+    <body>
+        <h2 class="text-center">Grupo 1 - Sistemas Operativos 19-2 FIIS UNI</h2 class="text-center">
+        
+        <h4>Tiempo : <span id="tiempo"></span></h4>    
+        <div class="container-fluid">
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <table class="table table-bordered" id="tablaPerso">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Procesos Personalizados</th>
+                            </tr>
+                            <tr>
+                                <th>Inicio</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="100">Todos</th>
+                            </tr>
+                        </thead>
+                        <tbody id="todos">
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="100">Listos</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listos">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-7">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input checked type="radio" name="tipoDatos" class="custom-control-input tipoDatos" id="aleatorio" value="1">
+                            <label class="custom-control-label" for="aleatorio">ALEATORIA</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" name="tipoDatos" id="personalizado" class="custom-control-input tipoDatos"  value="2">
+                                <label class="custom-control-label" for="personalizado">PERSONALIZADA</label>
+                        </div>
+
+                    
+                  
+
+                    <br>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input checked class="custom-control-input tipoAlgoritmo" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                        <label class="custom-control-label" for="inlineRadio1">FCFS</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input tipoAlgoritmo" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                        <label class="custom-control-label" for="inlineRadio2">SJF No Expropiativo</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input tipoAlgoritmo" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
+                        <label class="custom-control-label" for="inlineRadio3">SJF Expropiativo</label>
+                    </div>
+
+                    <br>
+                    <br>
+                    <button id="iniciar" class="btn btn-success"><i class="fas fa-play"></i> Iniciar</button>
+                    
+                    <button id="limpiar" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Limpiar</button>
+                    <button id="agregarProceso" class="btn btn-primary" style="display:none"><i class="fas fa-plus"></i> Proceso</button>
+
+                    <br>
+                    <br>
+                    
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID Proceso</th>
+                                <th>Inicio</th>
+                                <th>Duración</th>
+                                <th>Estado</th>
+                                <th>ID Padre</th>
+                                <th>Contabilización</th>
+                                <th>Program Counter</th>
+                                <th>Tiempo de Espera</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr><th>Agregar Proceso</th></tr>
+                                    <tr>
+                                        <th>Duración</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="" id="duraProceso" class="form-control   ">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger" id="procesoInte"><i class="fas fa-plus"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <table class="table" id="promedios">
+                        <thead>
+                            <tr>
+                                <th>Promedio Espera</th>
+                                <th> <button id="limpiarPromedios" class="btn btn-danger"><i class="fas fa-trash-alt" aria-hidden="true"></i></button> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="promEspera"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- <div class="row" >
+                <div class="col-md-12" id="divProcesos">
+
+                    <table id="miTabla" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>PROGRAM COUNTER</th>
+                             
+                                <th>CONSUMO DE PROCESADOR</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+           
+        </div>
+
+    </body>
+</html>
